@@ -5,7 +5,7 @@ import { delay, of } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class PostService {
+export class TodoService {
   constructor() {}
 
   getTodos() {

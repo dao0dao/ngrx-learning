@@ -5,12 +5,15 @@ import { routes } from './app.routes';
 import { provideImports } from './import.providers.from';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { todosReducer } from './todos/store/reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideImports,
-    provideStore(),
+    provideStore({
+      todos: todosReducer,
+    }),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode
