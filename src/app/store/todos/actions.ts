@@ -11,3 +11,18 @@ export const getTodosFailure = createAction(
   '[Todos] Get todos failure',
   props<{ error: string }>()
 );
+
+export const completeTodo = createAction(
+  '[Todos] Complete todo',
+  props<{ id: string; status: 'done' }>()
+);
+
+export const removeTodo = createAction(
+  '[Todos] Remove todo',
+  props<{ id: string }>()
+);
+
+export const addTodo = createAction(
+  '[Todos] Add todo',
+  props<{ todo: Todo }>()
+);

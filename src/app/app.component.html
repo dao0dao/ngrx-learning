@@ -14,6 +14,7 @@
             class="btn btn-outline-primary btn-sm"
             type="button"
             id="todo"
+            (click)="addTodo()"
         >
             Dodaj
         </button>
@@ -23,10 +24,16 @@
     } @else {
         @for (todo of (todos | async); track todo.id) {
             <div class="d-flex my-2 align-items-center border border-dark-subtle rounded-3">
-                <p class="text-ceter flex-grow-1 mb-0">{{todo.text}}</p>
+                @if('done' === todo.status){
+                    <del class="text-ceter flex-grow-1 mb-0">{{todo.text}}</del>
+                }@else {
+                    <p class="text-ceter flex-grow-1 mb-0">{{todo.text}}</p>
+                }
                 <div class="btn-group ms-auto">
-                    <button class="btn btn-success mx-1 btn-sm rounded-3"><i class="bi bi-check-lg me-2"></i>Zrobione</button>
-                    <button class="btn btn-danger mx-s btn-sm rounded-3"><i class="bi bi-x-lg me-2"></i>Usuń</button>
+                    @if ('undone' === todo.status) {
+                        <button class="btn btn-success mx-1 btn-sm rounded-3" (click)="completeTodo(todo.id)"><i class="bi bi-check-lg me-2"></i>Zrobione</button>
+                    }
+                    <button class="btn btn-danger mx-s btn-sm rounded-3" (click)="removeTodo(todo.id)"><i class="bi bi-x-lg me-2"></i>Usuń</button>
                 </div>
             </div>
         } @empty {

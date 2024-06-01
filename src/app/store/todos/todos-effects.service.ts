@@ -10,17 +10,17 @@ import { TodoService } from '../../services/todo.service';
 export class TodosEffectsService {
   constructor(private actions$: Actions, private todosService: TodoService) {}
 
-  getTodos$ = createEffect(() =>
+  private getTodos$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TodosActions.getTodos),
       mergeMap(() => {
-        return this.todosService.getTodos().pipe(
-          map((todos) => TodosActions.getTodosSuccess({ todos })),
-          catchError((error) =>
-            of(TodosActions.getTodosFailure({ error: error.mesage }))
-          )
-        );
-      })
+        return this.todosService.getTodos();
+      }),
+      map((todos) => TodosActions.getTodosSuccess({ todos })),
+      catchError((error) =>
+        of(TodosActions.getTodosFailure({ error: error.mesage }))
+      
+      )
     )
   );
 }

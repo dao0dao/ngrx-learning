@@ -27,4 +27,23 @@ export class AppComponent {
 
   todo: string = '';
   todos: Observable<Todo[]>;
+
+  completeTodo(id: string) {
+    this.store.dispatch(TodosActions.completeTodo({ id, status: 'done' }));
+  }
+
+  removeTodo(id: string) {
+    this.store.dispatch(TodosActions.removeTodo({ id }));
+  }
+
+  addTodo() {
+    const id = new Date().getTime().toString();
+    const todo: Todo = {
+      id,
+      status: 'undone',
+      text: this.todo,
+    };
+    this.store.dispatch(TodosActions.addTodo({ todo }));
+    this.todo = '';
+  }
 }
