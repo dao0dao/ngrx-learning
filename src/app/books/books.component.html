@@ -1,1 +1,50 @@
-<p>books works!</p>
+<div class="container">
+    <h5 class="title">Lista książek</h5>
+    <div class="input-group mb-3">
+        <button
+            class="btn btn-outline-secondary dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+        >
+            {{action}}
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+                <span
+                    class="dropdown-item"
+                    (click)="changeSearch('Tytuł książki')"
+                >
+                    Tytuł książki
+                </span>
+            </li>
+            <li>
+                <span
+                    class="dropdown-item"
+                    (click)="changeSearch('Autor książki')"
+                >
+                    Autor książki
+                </span>
+            </li>
+        </ul>
+        <input
+            type="text"
+            class="form-control"
+            placeholder="wpisz treść do wyszukania"
+            aria-label="todo"
+            aria-describedby="todo"
+            [(ngModel)]="inputText"
+        >
+        <button
+            class="btn btn-outline-primary btn-sm"
+            type="button"
+            id="todo"
+            (click)="find()"
+        >
+            Wyszukaj
+        </button>
+    </div>
+    @if (isLoading$ | async) {
+        <p>Wczytuję ...</p>
+    }
+</div>

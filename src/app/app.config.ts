@@ -8,13 +8,18 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { todosReducer } from './store/todos/reducer';
 import { provideEffects } from '@ngrx/effects';
 import { TodosEffectsService } from './store/todos/todos-effects.service';
+import { BooksReducer } from './store/books/reducer';
+import { BookEffectsService } from './store/books/book-effects.service';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideHttpClient(),
     provideRouter(routes),
     provideImports,
     provideStore({
       todos: todosReducer,
+      books: BooksReducer,
     }),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
@@ -24,6 +29,6 @@ export const appConfig: ApplicationConfig = {
       traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
       connectInZone: true, // If set to true, the connection is established within the Angular zone
     }),
-    provideEffects([TodosEffectsService]),
+    provideEffects([TodosEffectsService, BookEffectsService]),
   ],
 };

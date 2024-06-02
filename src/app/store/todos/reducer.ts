@@ -1,15 +1,15 @@
-import { TodosStateInterface } from '../../types/todos/post.state.interface';
+import { TodosStateInterface } from '../../types/todos/todo.state.interface';
 import { createReducer, on } from '@ngrx/store';
 import * as TodoActions from './actions';
 
-export const todosInitialState: TodosStateInterface = {
+const initialState: TodosStateInterface = {
   error: null,
   isLoading: false,
   todos: [],
 };
 
 export const todosReducer = createReducer(
-  todosInitialState,
+  initialState,
   on(TodoActions.getTodos, (state) => ({ ...state, isLoading: true })),
   on(TodoActions.getTodosSuccess, (state, action) => ({
     ...state,
