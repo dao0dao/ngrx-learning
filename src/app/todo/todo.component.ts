@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { isLoadingTodosSelector, TodosSelector } from '../store/todos/selector';
 import * as TodosActions from '../store/todos/actions';
 import { AppStateInterface } from '../types/app.state.interface';
-import { Todo } from '../types/todo.interface';
+import { Todo } from '../types/todos/todo.interface';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 

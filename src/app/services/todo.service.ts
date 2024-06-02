@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Todo } from '../types/todo.interface';
+import { Todo } from '../types/todos/todo.interface';
 import { delay, of } from 'rxjs';
 
 @Injectable({

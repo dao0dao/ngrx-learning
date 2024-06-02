@@ -1,4 +1,4 @@
-import { TodosStateInterface } from "./post.state.interface";
+import { TodosStateInterface } from "./todos/post.state.interface";
 
 export interface AppStateInterface  {
     todos: TodosStateInterface

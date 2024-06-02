@@ -1,4 +1,4 @@
-import { TodosStateInterface } from '../../types/post.state.interface';
+import { TodosStateInterface } from '../../types/todos/post.state.interface';
 import { createReducer, on } from '@ngrx/store';
 import * as TodoActions from './actions';
 
