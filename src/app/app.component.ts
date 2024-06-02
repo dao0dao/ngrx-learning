@@ -1,49 +1,15 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
-import { Store, select } from '@ngrx/store';
-import * as TodosActions from './store/todos/actions';
-import { isLoadingTodosSelector, TodosSelector } from './store/todos/selector';
-import { Observable } from 'rxjs';
-import { AppStateInterface } from './types/app.state.interface';
-import { CommonModule } from '@angular/common';
-import { Todo } from './types/todo.interface';
+
+import { RouterLink, RouterOutlet } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, CommonModule],
+  imports: [RouterOutlet, RouterLink],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  constructor(private store: Store<AppStateInterface>) {
-    this.store.dispatch(TodosActions.getTodos());
-    this.isLoading$ = this.store.pipe(select(isLoadingTodosSelector));
-    this.todos = this.store.pipe(select(TodosSelector));
-  }
-  isLoading$: Observable<boolean>;
-  title = 'NgRxNgxBootsrrap';
 
-  todo: string = '';
-  todos: Observable<Todo[]>;
-
-  completeTodo(id: string) {
-    this.store.dispatch(TodosActions.completeTodo({ id, status: 'done' }));
-  }
-
-  removeTodo(id: string) {
-    this.store.dispatch(TodosActions.removeTodo({ id }));
-  }
-
-  addTodo() {
-    const id = new Date().getTime().toString();
-    const todo: Todo = {
-      id,
-      status: 'undone',
-      text: this.todo,
-    };
-    this.store.dispatch(TodosActions.addTodo({ todo }));
-    this.todo = '';
-  }
 }

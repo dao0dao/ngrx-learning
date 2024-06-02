@@ -1,45 +1,28 @@
-<div class="container">
-
-    <h5 class="title">Lista zadań</h5>
-    <div class="input-group mb-3">
-        <input
-            type="text"
-            class="form-control"
-            placeholder="wpisz zadanie do zrobienia"
-            aria-label="todo"
-            aria-describedby="todo"
-            [(ngModel)]="todo"
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <div
+            class="collapse navbar-collapse"
+            id="navbarSupportedContent"
         >
-        <button
-            class="btn btn-outline-primary btn-sm"
-            type="button"
-            id="todo"
-            (click)="addTodo()"
-        >
-            Dodaj
-        </button>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        routerLink="/todo"
+                    >
+                        Lista zadań
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        routerLink="/books"
+                    >
+                        Lista książek
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
-    @if (isLoading$ | async) {
-        <p>Wczytuję listę zadań ...</p>
-    } @else {
-        @for (todo of (todos | async); track todo.id) {
-            <div class="d-flex my-2 align-items-center border border-dark-subtle rounded-3">
-                @if('done' === todo.status){
-                    <del class="text-ceter flex-grow-1 mb-0">{{todo.text}}</del>
-                }@else {
-                    <p class="text-ceter flex-grow-1 mb-0">{{todo.text}}</p>
-                }
-                <div class="btn-group ms-auto">
-                    @if ('undone' === todo.status) {
-                        <button class="btn btn-success mx-1 btn-sm rounded-3" (click)="completeTodo(todo.id)"><i class="bi bi-check-lg me-2"></i>Zrobione</button>
-                    }
-                    <button class="btn btn-danger mx-s btn-sm rounded-3" (click)="removeTodo(todo.id)"><i class="bi bi-x-lg me-2"></i>Usuń</button>
-                </div>
-            </div>
-        } @empty {
-            <div>
-                <p>Brak zadań do zrobienia</p>
-            </div>
-        }
-    }
-</div>
+</nav>
+<router-outlet></router-outlet>
