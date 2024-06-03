@@ -27,7 +27,7 @@ export class BookEffectsService {
       mergeMap((data) => {
         return this.httpBooks.getBooksByAuthor(data.title);
       }),
-      map(({ items }) => BooksActions.updateBooksSuccess({ books: items }))
+      map(({ items }) => BooksActions.updateBooksSuccess({ books: items })) 
     )
   );
 }

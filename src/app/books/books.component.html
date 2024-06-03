@@ -55,7 +55,7 @@
                             <h5 class="card-title">{{book.volumeInfo.title}}</h5>
                             @for (author of book.volumeInfo.authors; track $index) {
                                 <p class="card-text">{{author}}</p>                        }
-                            <button class="btn btn-primary mt-auto">Dodaj do ulubionej</button>
+                            <button class="btn btn-primary mt-auto" (click)="addBook(book)">Dodaj do ulubionej</button>
                         </div>
                 </div>
             }@empty {

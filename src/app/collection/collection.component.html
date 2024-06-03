@@ -1,0 +1,18 @@
+<div class="container">
+    <h5 class="title">Ulubione książki</h5>
+    <div class="d-flex justify-content-center flex-row flex-wrap">
+        @for (book of collections$ | async; track book.id) {
+            <div class="card m-2" style="width: 18rem;">
+                    <img [src]="book.volumeInfo.imageLinks?.thumbnail" class="card-img-top img-thumbnail" alt="Brak miniaturki">
+                    <div class="card-body  d-flex flex-column">
+                        <h5 class="card-title">{{book.volumeInfo.title}}</h5>
+                        @for (author of book.volumeInfo.authors; track $index) {
+                            <p class="card-text">{{author}}</p>                        }
+                        <button class="btn btn-primary mt-auto" (click)="remove(book.id)">Usuń z ulubionych</button>
+                    </div>
+            </div>
+        }@empty {
+            <p>Brak książek</p>
+        }
+    </div>
+</div>

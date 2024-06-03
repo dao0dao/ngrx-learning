@@ -11,6 +11,7 @@ import { TodosEffectsService } from './store/todos/todos-effects.service';
 import { BooksReducer } from './store/books/reducer';
 import { BookEffectsService } from './store/books/book-effects.service';
 import { provideHttpClient } from '@angular/common/http';
+import { collectionReducer } from './store/collection/reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,6 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideStore({
       todos: todosReducer,
       books: BooksReducer,
+      collection: collectionReducer
     }),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
