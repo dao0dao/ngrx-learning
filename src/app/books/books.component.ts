@@ -5,12 +5,13 @@ import {
   booksSelector,
   isLoadingBooksSelector,
 } from '../store/books/selectors';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import * as BooksActions from '../store/books/actions';
 import * as CollectionActions from '../store/collection/actions';
 import { Book } from '../types/books/books.interface';
+import { collectionSelect } from '../store/collection/selectors';
 
 type SearchAction = 'Tytuł książki' | 'Autor książki';
 
@@ -25,7 +26,13 @@ export class BooksComponent {
   constructor(private store: Store<AppStateInterface>) {
     this.isLoading$ = store.pipe(select(isLoadingBooksSelector));
     this.books$ = store.pipe(select(booksSelector));
+    this.collections$ = this.store.pipe(select(collectionSelect));
   }
+  collections$: Observable<Book[]>;
+  isToast: boolean = false;
+  isToastError: boolean = false;
+  toastText: 'Dodano książkę' | 'Ta książka jest już zapisana' =
+    'Dodano książkę';
   isLoading$: Observable<boolean>;
   books$: Observable<Book[]>;
   inputText: string = '';
@@ -36,7 +43,24 @@ export class BooksComponent {
   }
 
   addBook(book: Book) {
-    this.store.dispatch(CollectionActions.addBookToCollection({ book }));
+    this.collections$.pipe(take(1)).subscribe({
+      next: (collections) => {
+        const isExist = collections.findIndex((c) => c.id === book.id);
+        if (-1 === isExist) {
+          this.toastText = 'Dodano książkę';
+          this.isToast = true;
+          this.isToastError = false;
+          this.store.dispatch(CollectionActions.addBookToCollection({ book }));
+        } else {
+          this.toastText = 'Ta książka jest już zapisana';
+          this.isToast = true;
+          this.isToastError = true;
+        }
+        setTimeout(() => {
+          this.closeToast();
+        }, 2000);
+      },
+    });
   }
 
   find() {
@@ -55,5 +79,9 @@ export class BooksComponent {
         );
         break;
     }
+  }
+
+  closeToast() {
+    this.isToast = false;
   }
 }

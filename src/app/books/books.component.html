@@ -64,3 +64,13 @@
         </div>
     }
 </div>
+
+
+<div class="toast" [ngClass]="{'show': isToast}" >
+    <div class="toast-header">
+      <button type="button" class="ms-auto btn-close"  (click)="closeToast()"></button>
+    </div>
+    <div class="toast-body text-center" >
+        <p [ngClass]="{'text-danger': isToastError, 'text-success': !isToastError}">{{toastText}}</p>
+    </div>
+</div>
